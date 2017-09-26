@@ -1,28 +1,34 @@
 defmodule Streamable.Client do
-  def get(url, {username, password}) do
-    get(url, Base.encode64("#{username}:#{password}"))
+  def get(url, authenticationEncoded, params \\ %{})
+  def get(url, {username, password}, params), do: get(url, generateAuthenticationEncoded(username, password), params)
+  def get(url, authenticationEncoded, params) do
+    header = [{"Authentication", "Basic #{authenticationEncoded}"}]
+    paramValue = if (!Enum.empty?(params)), do: "?" <> URI.encode_query(params), else: ""
+
+    url <> paramValue
+    |> HTTPoison.get(header)
+    |> handle_response
   end
 
-  def get(url, authenticationEncoded) do
+  def post(url, body, {username, password}), do: post(url, body, generateAuthenticationEncoded(username, password))
+  def post(url, body, authenticationEncoded) do
     header = [{"Authentication", "Basic #{authenticationEncoded}"}]
-    HTTPoison.get(url, header) |> handle_response
+    HTTPoison.post(url, body, header) |> handle_response
   end
+
+  defp generateAuthenticationEncoded(username, password), do: Base.encode64("#{username}:#{password}")
 
   defp handle_response({:ok, %HTTPoison.Response{headers: headers, body: body}}) do
-    {key, value} = Enum.find(headers, fn({key, _}) -> "Content-Type" == key end)
+    {_, value} = Enum.find(headers, fn({key, _}) -> "Content-Type" == key end)
     [value | _ ] = String.split(value, [";"])
-    
+
     case value do
-      "text/html" -> IO.inspect body
-      "application/json" -> IO.inspect body
+      "text/html" -> {:error, body}
+      "application/json" -> {:ok, body}
     end
-    
-    #Success
-    
-    #Error
   end
 
-  defp handle_response({:error, %HTTPoison.Error{reason: reason}}), do: IO.inspect reason
+  defp handle_response({:error, %HTTPoison.Error{reason: reason}}), do: {:error, reason}
+  defp handle_response(_), do: {:error, ""}
 
 end
-

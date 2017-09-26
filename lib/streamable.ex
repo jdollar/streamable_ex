@@ -3,19 +3,6 @@ defmodule Streamable do
   Documentation for Streamable.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Streamable.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
-  def start, do: :application.ensure_all_started(:httppoison)
+  def start, do: :application.ensure_all_started(:httppoison, :poison)
 
 end

@@ -32,4 +32,4 @@ use Mix.Config
 config :streamable, base_url: "https://api.streamable.com/"
 config :streamable, upload_endpoint: "upload"
 config :streamable, videos_endpoint: "videos"
-config :streamable, videos_embed_endpont: "ombed.json"
+config :streamable, videos_oembed_endpoint: "oembed.json"

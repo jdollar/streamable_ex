@@ -30,7 +30,9 @@ defmodule Streamable.Mixfile do
   defp deps do
     [
         {:httpoison, "~> 0.13"},
-        {:poison, "~> 3.1"}
+        {:poison, "~> 3.1"},
+        {:bypass, "~> 0.8", only: :test},
+        {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
     ]
   end
 end

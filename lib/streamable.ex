@@ -4,5 +4,4 @@ defmodule Streamable do
   """
 
   def start, do: :application.ensure_all_started(:httppoison, :poison)
-
 end

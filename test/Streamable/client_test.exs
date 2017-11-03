@@ -136,8 +136,6 @@ defmodule ClientTest do
         conn
         |> Plug.Conn.resp(200, "test")
         |> Plug.Conn.put_resp_header("Content-Type", "application/json")
-
-        conn
       end
       assert {:ok, "test"} == Client.post(url, body, auth)
     end

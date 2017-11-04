@@ -15,7 +15,15 @@ defmodule Streamable.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger]]
+    [
+      extra_applications: [:logger],
+      env: [
+        base_url: "https://api.streamable.com/",
+        upload_endpoint: "upload",
+        videos_endpoint: "videos",
+        videos_oembed_endpoint: "oembed.json"
+      ]
+    ]
   end
 
   # Dependencies can be Hex packages:

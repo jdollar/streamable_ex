@@ -28,8 +28,3 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
-
-config :streamable, base_url: "https://api.streamable.com/"
-config :streamable, upload_endpoint: "upload"
-config :streamable, videos_endpoint: "videos"
-config :streamable, videos_oembed_endpoint: "oembed.json"

@@ -21,7 +21,7 @@ defmodule Streamable.Videos do
       Application.get_env(:streamable, :videos_oembed_endpoint)
     ]
     |> Enum.join
-    |> Client.get(authentication, %{"url" => url})
+    |> Client.get(authentication, %{url: url})
     |> handle_videos_oembed_response
   end
 

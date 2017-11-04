@@ -16,29 +16,6 @@ defmodule VideosTest do
     "height": "50"
   }
   """
-  #
-  # {
-  #   "status": 2,
-  #   "files": {
-  #     "mp4": {
-  #       "status": 2,
-  #       "width": 480,
-  #       "url": "//cdn-w2.streamable.com/video/f6441ae0c84311e4af010bc47400a0a4.mp4?token=1510968575_9a9977e880a2b07e7e9f118928076fde980e11b9",
-  #       "bitrate": 0,
-  #       "duration": 0,
-  #       "size": 0,
-  #       "framerate": 0,
-  #       "height": 480
-  #     }
-  #   },
-  #   "embed_code": "<div style=\"width: 100%; height: 0px; position: relative; padding-bottom: 56.338%;\"><iframe class=\"streamable-embed\" src=\"https://streamable.com/o/moo\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: 100%; position: absolute;\" allowfullscreen></iframe></div>",
-  #   "source": null,
-  #   "thumbnail_url": "//images.streamable.com/west/image/f6441ae0c84311e4af010bc47400a0a4.jpg?height=100",
-  #   "url": "streamable.com/moo",
-  #   "message": null,
-  #   "title": "\"Please don't eat me!\"",
-  #   "percent": 100
-  # }
 
   @videos_success_response """
   {
@@ -108,14 +85,6 @@ defmodule VideosTest do
       assert {:ok, expected_video_details} == Videos.videos(shortcode, "encodedAuthentication")
     end
   end
-
-  #video
-  #defstruct [:status, :title, :url, :embed_code, :source, :thumbnail_url, :message, :percent, :files]
-
-  #fileDetails
-  # defstruct [:status, :url, :width, :height, :bitrate, :duration, :size, :framerate]
-
-  # %Video{files: %{"mp4": %FileDetails{}, "mp4-mobile": %FileDetails{}}})
 
   describe "oembed_video" do
     test "success response returns embed data", %{bypass: bypass} do

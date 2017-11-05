@@ -124,7 +124,7 @@ defmodule ClientTest do
   end
 
   defp validateAuthentication(headers, expected) do
-    {_, value} = Enum.find(headers, fn {key, _} -> "authentication" == key end)
+    {_, value} = Enum.find(headers, fn {key, _} -> "authorization" == key end)
     assert value == "Basic " <> expected
   end
 end

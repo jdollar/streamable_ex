@@ -44,7 +44,6 @@ defmodule VideosTest do
 
   setup do
     bypass = Bypass.open
-
     Application.put_env(:streamable, :base_url, "http://localhost:#{bypass.port}/")
     %{bypass: bypass}
   end
